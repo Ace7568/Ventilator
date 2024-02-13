@@ -36,4 +36,23 @@ app.use('/health',(req, res) => {
     res.send({ status: "OK"})
 })
 
-app.listen(port,() => console.log("service started on port: ", process.env.PORT || port));
+// app.listen(port,() => console.log("service started on port: ", process.env.PORT || port));
+
+const http = require('http');
+const httpServer = http.createServer(app);
+
+httpServer.listen(port, ()=>{
+  console.log("HTTP server : ", port);
+})
+
+const https = require('https');
+const options = {
+    key: fs.readFileSync('../ssl/server.key'), 
+    cert: fs.readFileSync('../ssl/server.crt') 
+};
+
+const httpsServer = https.createServer(options, app);
+
+httpsServer.listen(3003, () => {
+  console.log("HTTPS service started on port: 443");
+});
