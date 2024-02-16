@@ -47,12 +47,12 @@ httpServer.listen(port, ()=>{
 
 const https = require('https');
 const options = {
-    key: fs.readFileSync('../ssl/server.key'), 
-    cert: fs.readFileSync('../ssl/server.crt') 
+    key: fs.readFileSync('./ssl/server.key'), 
+    cert: fs.readFileSync('./ssl/server.crt') 
 };
 
 const httpsServer = https.createServer(options, app);
 
 httpsServer.listen(3003, () => {
-  console.log("HTTPS service started on port: 443");
+  console.log("HTTPS service started on port: 3003");
 });
